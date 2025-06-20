@@ -1,0 +1,22 @@
+name: HTML and CSS Linting
+
+on:
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+  ci-develop-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository on the runner
+        uses: actions/checkout@v4
+
+      - name: Lint HTML files with HTMLHint
+        run: npx htmlhint "**/*.html"
+
+      - name: Lint CSS files with Stylelint
+        run: npx stylelint "**/*.css"
+
+    
