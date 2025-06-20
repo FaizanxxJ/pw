@@ -1,22 +1,20 @@
-name: HTML and CSS Linting
-
+name: html css linting
 on:
   pull_request:
     branches:
       - develop
-
+    types:
+     - opened
+     - synchronize
 jobs:
   ci-develop-job:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repository on the runner
-        uses: actions/checkout@v4
-
-      - name: Lint HTML files with HTMLHint
-        run: npx htmlhint "**/*.html"
-
-      - name: Lint CSS files with Stylelint
-        run: npx stylelint "**/*.css"
-
-    
+   runs-on: ubuntu-latest
+   steps:
+     - name: Checkout repository on the runner 
+       uses: actions/checkout@v4
+     - name: Lint HTML files with HTMLhint
+       run: npx htmlhint "**/*.html"
+     - name: Lint css files with stylelint
+       run : npx stylelint "**/*.css"
+     - name: Build website with Parcel
+       run: npx parcel build "./src/index.html" --dist-dir "./dist" --public-url "./"
